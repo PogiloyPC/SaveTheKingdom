@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using PlayerModification;
 
 public class ControleHouse : MonoBehaviour
 {        
@@ -20,7 +21,7 @@ public class ControleHouse : MonoBehaviour
     private bool _isImprovable;
     private bool _isUpgraded;
 
-    private Player _player;
+    private IBuyer _player;
 
     private SizeCountry _sizeCountry;
 
@@ -31,7 +32,7 @@ public class ControleHouse : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (_player.Wallet.MoneyCount >= _priceForUpgrade)
+        if (_player.MoneyCount() >= _priceForUpgrade)
             _isUpgraded = true;
     }
 
@@ -72,7 +73,7 @@ public class ControleHouse : MonoBehaviour
     {
         _houseObj.LevelUp();
 
-        _player.Wallet.Pay(_priceForUpgrade);
+        _player.WantPay().Pay(_priceForUpgrade);
 
         _priceForUpgrade += _priceForUpgrade / 3;
 
@@ -90,7 +91,7 @@ public class ControleHouse : MonoBehaviour
 
     private void BuildHouse()
     {
-        _player.Wallet.Pay(_priceBuildHouse);
+        _player.WantPay().Pay(_priceBuildHouse);
 
         ReloadAction();
 
@@ -120,28 +121,22 @@ public class ControleHouse : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Player player = other.gameObject.GetComponent<Player>();
+        IBuyer player = other.gameObject.GetComponent<Player>();
 
         if (player != null)
         {
             _isImprovable = true;
           
             _player = player;
-        }
-    }
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        Player player = other.gameObject.GetComponent<Player>();
-
-        if (player != null)        
             if (_houseObj.gameObject.activeSelf)
                 _onDisplayInfoHouse?.Invoke(_houseObj.NameHouse, _houseObj.LevelHouse.ToString(), _houseObj.HealthHouse.ToString(), true);
-    }
+        }
+    }    
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Player player = other.gameObject.GetComponent<Player>();
+        IBuyer player = other.gameObject.GetComponent<Player>();
 
         if (player != null)
         {

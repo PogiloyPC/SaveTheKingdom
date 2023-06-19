@@ -13,13 +13,13 @@ public class UnitFreeCitizen : UnitCitizen
 
     private void Update()
     {
-        _forgeHaveItem = Country.ItemsInShop.Count > 0 && !_item;
+        _forgeHaveItem = Countr.ItemsInShop.Count > 0 && !_item;
 
         if (_forgeHaveItem)
         {
             if (GetTaskState() is FollowObjectState followObject)
             {
-                followObject.LookObject(Country.ForgePosition);
+                followObject.LookObject(Countr.ForgePosition);
 
                 GetStateMachineUnit().ChangeState(GetTaskState());
             }
@@ -40,7 +40,7 @@ public class UnitFreeCitizen : UnitCitizen
         {
             _item = forge.DeleteItem();
 
-            Country.UpgradeUnit(transform, this, _item);
+            Countr.UpgradeUnit(transform, this, _item);
         }
     }
 }

@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
+using PlayerModification;
 using PlayerModification.Wallet;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IBuyer
 {
     [SerializeField] private Animator _anim;
 
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private BuyUnit _buyUnit;
 
-    public PlayerWallet Wallet { get; private set; }
+    private PlayerWallet _wallet;
     private PlayerMoving _moving;
     private PlayerAnimation _animation;
     private PlayerState _state;
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Wallet = new PlayerWallet(_onChangeMoney);
+        _wallet = new PlayerWallet(_onChangeMoney);
         _animation = new PlayerAnimation(_anim, transform);
         _moving = new PlayerMoving(_rb, _speed, _forceJump);
         _state = new PlayerState(_posGroundPoint, _radiusCircle, _groundLayer);
@@ -41,45 +42,31 @@ public class Player : MonoBehaviour
         _animation.AnimAttack(_moving.Attack());
 
         if (Input.GetKeyDown(KeyCode.F))
-            _buyUnit.DropMoney(Wallet);
+            _buyUnit.DropMoney(_wallet);
 
         if (Input.GetKeyDown(KeyCode.M))
-            Wallet.GetMoney(_moneyChit);
+            _wallet.GetMoney(_moneyChit);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        //Money money = other.collider.gameObject.GetComponent<Money>();
         MoneyPlayer moneyPlayer = other.collider.gameObject.GetComponent<MoneyPlayer>();
 
-        //if (money != null)
-        //{
-        //    Wallet.GetMoney(money);
-
-        //    money.gameObject.SetActive(false);
-        //}
         if (moneyPlayer != null)
         {
-            Wallet.GetMoney(moneyPlayer);
+            _wallet.GetMoney(moneyPlayer);
 
             moneyPlayer.gameObject.SetActive(false);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public IWantPay WantPay()
     {
-        ControleHouse creater = other.gameObject.GetComponent<ControleHouse>();
-
-        if (creater != null) { }
-
-
+        return _wallet;
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    public int MoneyCount()
     {
-        ControleHouse creater = other.gameObject.GetComponent<ControleHouse>();
-
-        if (creater != null) { }
-
+        return _wallet.MoneyCount;
     }
 }

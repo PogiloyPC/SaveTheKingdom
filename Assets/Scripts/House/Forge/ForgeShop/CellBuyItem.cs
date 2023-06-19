@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using PlayerModification;
 
-public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler
+public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IActiveObject
 {
     [SerializeField] private Image _timerBuy;
 
@@ -12,7 +13,7 @@ public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     [SerializeField] private int _priceItem;
 
-    private Player _player;
+    private IBuyer _player;
 
     private float _currentTime;
     private float _finishTime = 1.5f;
@@ -28,7 +29,7 @@ public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_forge.Items.Count < _maxBuyItem && _player.Wallet.MoneyCount >= _priceItem)
+        if (_forge.Items.Count < _maxBuyItem && _player.MoneyCount() >= _priceItem)
             _isBuy = true;
     }
 
@@ -55,9 +56,8 @@ public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     private void CreateItem()
     {
-        _player.Wallet.Pay(_priceItem);
-
-        _forge.CreateItem(_item);
+        if (_player.WantPay().Pay(_priceItem))
+            _forge.CreateItem(_item);
 
         OnEndBuy();
     }
@@ -70,4 +70,19 @@ public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
         _timerBuy.fillAmount = 0f;
     }
+
+    public void SetActive(IChangeActive changeActive)
+    {
+        gameObject.SetActive(changeActive.OnSwitchObject());
+    }
+}
+
+public interface IActiveObject
+{
+    public void SetActive(IChangeActive changeActive);
+}
+
+public interface IChangeActive
+{
+    public bool OnSwitchObject();    
 }

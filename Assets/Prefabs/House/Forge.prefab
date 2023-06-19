@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1606950793266137770}
   - component: {fileID: 1606950793266137751}
   - component: {fileID: 1606950793266137748}
-  - component: {fileID: 1606950793266137749}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -77,22 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1606950793266137749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606950793266137771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerBuy: {fileID: 1606950793924919319}
-  _item: {fileID: 3708327841812188752, guid: 02b762ce4c4443a4f84cee5d4c7926fe, type: 3}
-  _forge: {fileID: 1606950793596186600}
-  _priceItem: 3
 --- !u!1 &1606950793314390089
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +87,7 @@ GameObject:
   - component: {fileID: 1606950793314390088}
   - component: {fileID: 1606950793314390090}
   - component: {fileID: 1606950793314390091}
+  - component: {fileID: 5701354520485508761}
   m_Layer: 0
   m_Name: TimerBuy (6)
   m_TagString: Untagged
@@ -170,6 +154,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5701354520485508761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606950793314390089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBuy: {fileID: 1606950793314390091}
+  _item: {fileID: 6271897705250992261, guid: d435548cad200a64d8f507449ea7b26b, type: 3}
+  _forge: {fileID: 1606950793596186600}
+  _priceItem: 3
 --- !u!1 &1606950793325803464
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +181,6 @@ GameObject:
   - component: {fileID: 1606950793325803467}
   - component: {fileID: 1606950793325801524}
   - component: {fileID: 1606950793325801525}
-  - component: {fileID: 1606950793325803466}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -247,22 +246,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1606950793325803466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606950793325803464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerBuy: {fileID: 1606950793314390091}
-  _item: {fileID: 6271897705250992261, guid: d435548cad200a64d8f507449ea7b26b, type: 3}
-  _forge: {fileID: 1606950793596186600}
-  _priceItem: 3
 --- !u!1 &1606950793373937889
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +257,7 @@ GameObject:
   - component: {fileID: 1606950793373937888}
   - component: {fileID: 1606950793373937890}
   - component: {fileID: 1606950793373937891}
+  - component: {fileID: 7771387107457150994}
   m_Layer: 0
   m_Name: TimerBuy (5)
   m_TagString: Untagged
@@ -340,6 +324,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7771387107457150994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606950793373937889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBuy: {fileID: 1606950793373937891}
+  _item: {fileID: 9133694175656732345, guid: ff05e5d770033634f960d7846d6e60cc, type: 3}
+  _forge: {fileID: 1606950793596186600}
+  _priceItem: 3
 --- !u!1 &1606950793402103709
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,27 +494,16 @@ MonoBehaviour:
   _nameHouse: Forge
   _levelHouse: 0
   _healthHouse: 7
-  _shopForge: {fileID: 1606950793806817943}
-  _itemsShop:
-  - {fileID: 1663083028699421727, guid: 1d463aec26c9f1e4e93c697e729f4069, type: 3}
-  - {fileID: 3708327841812188752, guid: 02b762ce4c4443a4f84cee5d4c7926fe, type: 3}
-  - {fileID: 9133694175656732345, guid: ff05e5d770033634f960d7846d6e60cc, type: 3}
-  - {fileID: 6271897705250992261, guid: d435548cad200a64d8f507449ea7b26b, type: 3}
-  - {fileID: 5659051991943931462, guid: d95d1ec1bbd0231448046f4b487c4a0a, type: 3}
-  - {fileID: 1878093528589410731, guid: 285f146b72f970b44b615c8618c306ca, type: 3}
-  - {fileID: 3920072034289689206, guid: 473a19e4cc2ecf143ba5068ad550309e, type: 3}
-  - {fileID: 5466992427178992946, guid: 31a8d7ac0266cd04287cf4638b42633e, type: 3}
-  _items: []
-  _cellsBuyObjects:
-  - {fileID: 1606950794128422166}
-  - {fileID: 1606950793882297016}
-  - {fileID: 1606950793860652425}
-  - {fileID: 1606950795275028723}
-  - {fileID: 1606950794461109579}
-  - {fileID: 1606950793373937889}
-  - {fileID: 1606950793314390089}
-  - {fileID: 1606950793924919317}
   _posSpawn: {fileID: 1606950794062101499}
+  _cellsBuyObjects:
+  - {fileID: 3878086531610746033}
+  - {fileID: 9101373211082779035}
+  - {fileID: 8743368572460908178}
+  - {fileID: 8894083925390397116}
+  - {fileID: 5558977752255663932}
+  - {fileID: 7771387107457150994}
+  - {fileID: 5701354520485508761}
+  - {fileID: 5237485453920582102}
   _offsetX: 0.15
 --- !u!61 &1606950793596186602
 BoxCollider2D:
@@ -662,7 +651,6 @@ GameObject:
   - component: {fileID: 1606950793858013432}
   - component: {fileID: 1606950793858013413}
   - component: {fileID: 1606950793858013434}
-  - component: {fileID: 1606950793858013435}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -728,22 +716,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1606950793858013435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606950793858013433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerBuy: {fileID: 1606950795275028733}
-  _item: {fileID: 1878093528589410731, guid: 285f146b72f970b44b615c8618c306ca, type: 3}
-  _forge: {fileID: 1606950793596186600}
-  _priceItem: 3
 --- !u!1 &1606950793860652425
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +727,7 @@ GameObject:
   - component: {fileID: 1606950793860652424}
   - component: {fileID: 1606950793860652426}
   - component: {fileID: 1606950793860652427}
+  - component: {fileID: 8743368572460908178}
   m_Layer: 0
   m_Name: TimerBuy (2)
   m_TagString: Untagged
@@ -821,6 +794,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8743368572460908178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606950793860652425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBuy: {fileID: 1606950793860652427}
+  _item: {fileID: 3920072034289689206, guid: 473a19e4cc2ecf143ba5068ad550309e, type: 3}
+  _forge: {fileID: 1606950793596186600}
+  _priceItem: 2
 --- !u!1 &1606950793882297016
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +821,7 @@ GameObject:
   - component: {fileID: 1606950793882297019}
   - component: {fileID: 1606950793882296997}
   - component: {fileID: 1606950793882297018}
+  - component: {fileID: 9101373211082779035}
   m_Layer: 0
   m_Name: TimerBuy (1)
   m_TagString: Untagged
@@ -898,6 +888,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9101373211082779035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606950793882297016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBuy: {fileID: 1606950793882297018}
+  _item: {fileID: 5659051991943931462, guid: d95d1ec1bbd0231448046f4b487c4a0a, type: 3}
+  _forge: {fileID: 1606950793596186600}
+  _priceItem: 2
 --- !u!1 &1606950793924919317
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +915,7 @@ GameObject:
   - component: {fileID: 1606950793924919316}
   - component: {fileID: 1606950793924919318}
   - component: {fileID: 1606950793924919319}
+  - component: {fileID: 5237485453920582102}
   m_Layer: 0
   m_Name: TimerBuy (7)
   m_TagString: Untagged
@@ -975,6 +982,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5237485453920582102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606950793924919317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBuy: {fileID: 1606950793924919319}
+  _item: {fileID: 3708327841812188752, guid: 02b762ce4c4443a4f84cee5d4c7926fe, type: 3}
+  _forge: {fileID: 1606950793596186600}
+  _priceItem: 3
 --- !u!1 &1606950794062101496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1040,7 @@ GameObject:
   - component: {fileID: 1606950794128422161}
   - component: {fileID: 1606950794128422163}
   - component: {fileID: 1606950794128422160}
+  - component: {fileID: 3878086531610746033}
   m_Layer: 0
   m_Name: TimerBuy
   m_TagString: Untagged
@@ -1083,6 +1107,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3878086531610746033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606950794128422166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBuy: {fileID: 1606950794128422160}
+  _item: {fileID: 1663083028699421727, guid: 1d463aec26c9f1e4e93c697e729f4069, type: 3}
+  _forge: {fileID: 1606950793596186600}
+  _priceItem: 2
 --- !u!1 &1606950794367163206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1134,6 @@ GameObject:
   - component: {fileID: 1606950794367163201}
   - component: {fileID: 1606950794367163202}
   - component: {fileID: 1606950794367163203}
-  - component: {fileID: 1606950794367163200}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -1160,22 +1199,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1606950794367163200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606950794367163206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerBuy: {fileID: 1606950794128422160}
-  _item: {fileID: 1663083028699421727, guid: 1d463aec26c9f1e4e93c697e729f4069, type: 3}
-  _forge: {fileID: 1606950793596186600}
-  _priceItem: 2
 --- !u!1 &1606950794461109579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,6 +1210,7 @@ GameObject:
   - component: {fileID: 1606950794461109578}
   - component: {fileID: 1606950794461109684}
   - component: {fileID: 1606950794461109685}
+  - component: {fileID: 5558977752255663932}
   m_Layer: 0
   m_Name: TimerBuy (3)
   m_TagString: Untagged
@@ -1253,6 +1277,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5558977752255663932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606950794461109579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBuy: {fileID: 1606950794461109685}
+  _item: {fileID: 5466992427178992946, guid: 31a8d7ac0266cd04287cf4638b42633e, type: 3}
+  _forge: {fileID: 1606950793596186600}
+  _priceItem: 2
 --- !u!1 &1606950794670403590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,7 +1388,6 @@ GameObject:
   - component: {fileID: 1606950794713233895}
   - component: {fileID: 1606950794713233888}
   - component: {fileID: 1606950794713233889}
-  - component: {fileID: 1606950794713233894}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -1414,22 +1453,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1606950794713233894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606950794713233892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerBuy: {fileID: 1606950793373937891}
-  _item: {fileID: 9133694175656732345, guid: ff05e5d770033634f960d7846d6e60cc, type: 3}
-  _forge: {fileID: 1606950793596186600}
-  _priceItem: 3
 --- !u!1 &1606950794880840783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,7 +1464,6 @@ GameObject:
   - component: {fileID: 1606950794880840782}
   - component: {fileID: 1606950794880840779}
   - component: {fileID: 1606950794880840776}
-  - component: {fileID: 1606950794880840777}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -1507,22 +1529,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1606950794880840777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606950794880840783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerBuy: {fileID: 1606950793882297018}
-  _item: {fileID: 5659051991943931462, guid: d95d1ec1bbd0231448046f4b487c4a0a, type: 3}
-  _forge: {fileID: 1606950793596186600}
-  _priceItem: 2
 --- !u!1 &1606950795239243025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,6 +1625,7 @@ GameObject:
   - component: {fileID: 1606950795275028722}
   - component: {fileID: 1606950795275028732}
   - component: {fileID: 1606950795275028733}
+  - component: {fileID: 8894083925390397116}
   m_Layer: 0
   m_Name: TimerBuy (4)
   m_TagString: Untagged
@@ -1685,6 +1692,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8894083925390397116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606950795275028723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerBuy: {fileID: 1606950795275028733}
+  _item: {fileID: 1878093528589410731, guid: 285f146b72f970b44b615c8618c306ca, type: 3}
+  _forge: {fileID: 1606950793596186600}
+  _priceItem: 3
 --- !u!1 &1606950795327422215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,7 +1719,6 @@ GameObject:
   - component: {fileID: 1606950795327422214}
   - component: {fileID: 1606950795327422211}
   - component: {fileID: 1606950795327422208}
-  - component: {fileID: 1606950795327422209}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -1762,22 +1784,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1606950795327422209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606950795327422215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerBuy: {fileID: 1606950794461109685}
-  _item: {fileID: 5466992427178992946, guid: 31a8d7ac0266cd04287cf4638b42633e, type: 3}
-  _forge: {fileID: 1606950793596186600}
-  _priceItem: 2
 --- !u!1 &1606950795329172731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +1795,6 @@ GameObject:
   - component: {fileID: 1606950795329172730}
   - component: {fileID: 1606950795329172711}
   - component: {fileID: 1606950795329172708}
-  - component: {fileID: 1606950795329172709}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -1855,22 +1860,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1606950795329172709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606950795329172731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb1dc4397d57b4438a2e42a90cc1dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerBuy: {fileID: 1606950793860652427}
-  _item: {fileID: 3920072034289689206, guid: 473a19e4cc2ecf143ba5068ad550309e, type: 3}
-  _forge: {fileID: 1606950793596186600}
-  _priceItem: 2
 --- !u!1001 &4874069350113247027
 PrefabInstance:
   m_ObjectHideFlags: 0

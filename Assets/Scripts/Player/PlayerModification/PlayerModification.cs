@@ -1,7 +1,14 @@
 using UnityEngine;
+using PlayerModification.Wallet;
 
 namespace PlayerModification
 {
+    public interface IBuyer
+    {
+        public IWantPay WantPay();
+
+        public int MoneyCount();
+    }
 
     namespace Wallet
     {

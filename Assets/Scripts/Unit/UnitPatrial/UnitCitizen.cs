@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class UnitCitizen : Unit
 {
     private Country _country;
-    protected Country Country => _country;
+    protected Country Countr => _country;
 
     [SerializeField] private int _id;
 
@@ -15,9 +15,9 @@ public abstract class UnitCitizen : Unit
 
         _id = _country._generatorId.GenerateNewId();        
 
-        StartCitizenUnit();        
-
         _country.AddFreeUnits(this);
+
+        StartCitizenUnit();        
     }
 
     protected abstract void StartCitizenUnit();    

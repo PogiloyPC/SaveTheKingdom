@@ -62,7 +62,7 @@ public class DaySystem : MonoBehaviour
     {
         CurrentDayTime += Time.deltaTime / _dayLength;
 
-        Debug.Log(CurrentDayTime);
+        //Debug.Log(CurrentDayTime);
 
         var cam = _cam.backgroundColor;
         cam = Color.Lerp(_dayBox.color, _nightBox.color, 1 - _dayCurve.Evaluate(CurrentDayTime));
