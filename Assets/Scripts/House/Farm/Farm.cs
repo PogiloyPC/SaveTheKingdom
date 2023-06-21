@@ -1,20 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StructHouse;
 
-public class Farm : House
-{
-    [SerializeField] private Transform[] _pos;
+public class Farm : House, IHaveField
+{   
+    private List<Vector3> _field = new List<Vector3>();   
 
-    private List<Vector3> _field = new List<Vector3>();
+    [SerializeField] private int _countField;   
 
-    public List<Vector3> FieldPos => _field;
-
-    [SerializeField] private int _countField;
-
-    public int CountField { get { return _countField; } private set { } }
-
-    private Country _country;
+    private IGetHouseFields _country;
     
     private void OnEnable()
     {
@@ -22,7 +17,7 @@ public class Farm : House
 
         _country = GameObject.Find("Country").GetComponent<Country>();
 
-        _country.GetFarm(this);
+        _country.GetFields(this);
     }    
 
     private void Field()
@@ -35,12 +30,17 @@ public class Farm : House
         for (int i = 0; i < _countField / 2; i++)
         {
             _field.Add(transform.position + new Vector3(-i - 0.5f, -0.5f, 0f));
-        }
+        }        
+    }
 
-        for (int i = 0; i < _pos.Length; i++)
-        {
-            _pos[i].position = _field[i];
-        }
+    public List<Vector3> Fields()
+    {
+        return _field;
+    }
+
+    public int CountFields()
+    {
+        return _countField;
     }
 
     private void OnDrawGizmos()

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public abstract class UnitCitizen : Unit
-{
+{    
     private Country _country;
     protected Country Countr => _country;
 
@@ -20,8 +20,8 @@ public abstract class UnitCitizen : Unit
         StartCitizenUnit();        
     }
 
-    protected abstract void StartCitizenUnit();    
-
+    protected abstract void StartCitizenUnit();       
+    
     public override Vector3 LeftBorders()
     {
         return _country.LeftBorders;

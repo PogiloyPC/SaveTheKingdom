@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using PlayerModification;
+using StructHouse;
 
 public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IActiveObject
 {
@@ -12,6 +13,7 @@ public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     [SerializeField] private Forge _forge;
 
     [SerializeField] private int _priceItem;
+    private int _maxBuyItem = 8;
 
     private IBuyer _player;
 
@@ -19,8 +21,6 @@ public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     private float _finishTime = 1.5f;
 
     private bool _isBuy;
-
-    private int _maxBuyItem = 8;
 
     private void Start()
     {
@@ -75,14 +75,4 @@ public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     {
         gameObject.SetActive(changeActive.OnSwitchObject());
     }
-}
-
-public interface IActiveObject
-{
-    public void SetActive(IChangeActive changeActive);
-}
-
-public interface IChangeActive
-{
-    public bool OnSwitchObject();    
 }

@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace CountryModifi
 {
-    public interface IThinkBorders
+    public interface IDistributeTasks
     {
-        public Vector3 LeftBorders();
-
-        public Vector3 RightBorders();
+        public void DistributeTasks(TaskCountry task);
     }
+
+
 }

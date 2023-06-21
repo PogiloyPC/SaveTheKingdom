@@ -24,5 +24,6 @@ public enum TypeItem
     bow,
     fishingRod,
     spear,
-    staff
+    staff,
+    hamer
 }

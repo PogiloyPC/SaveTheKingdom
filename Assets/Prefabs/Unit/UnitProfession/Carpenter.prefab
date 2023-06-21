@@ -140,6 +140,8 @@ MonoBehaviour:
   _anim: {fileID: 6863353175079025363}
   _speed: 1
   _id: 0
+  _damage: 0.2
+  _isWorked: 0
 --- !u!95 &6863353175079025363
 Animator:
   serializedVersion: 4

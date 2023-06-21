@@ -2,15 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using PlayerModification;
+using CountryModifi;
+using UnitStruct;
 
-public class ControleHouse : MonoBehaviour
-{        
+public class ControleHouse : TaskCountry
+{
     [SerializeField] private House _houseObj;
 
-    [SerializeField] private float _timerCreater;
-    private float _currentTimerCreater;
     [SerializeField] private float _finishTimeForUpgrade;
-    private float _currentTimeForUpgrade;
+    public float CurrentTimeForUpgrade { get; private set; }
+    public float FinishTime { get { return _finishTimeForUpgrade; } private set { } }
 
     [SerializeField] private int _priceBuildHouse;
     [SerializeField] private int _priceForUpgrade;
@@ -23,11 +24,15 @@ public class ControleHouse : MonoBehaviour
 
     private IBuyer _player;
 
+    private IDistributeTasks _distributeTasks;
+
     private SizeCountry _sizeCountry;
 
     private void Start()
     {
         _sizeCountry = GameObject.Find("SizeCountry").GetComponent<SizeCountry>();
+
+        _distributeTasks = GameObject.Find("Country").GetComponent<Country>();
     }
 
     private void OnMouseDown()
@@ -44,21 +49,46 @@ public class ControleHouse : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (_currentTimeForUpgrade >= _finishTimeForUpgrade)
-            CheckHouse();
-        else
+        if (CurrentTimeForUpgrade >= _finishTimeForUpgrade)
+        {
+            _distributeTasks.DistributeTasks(this);
+
+            PayForTheBuild();
+
             ReloadAction();
+        }
+        else
+        {
+            ReloadAction();
+        }
+    }
+
+    public override void CompleteTheTask(ITasker unit)
+    {
+        CurrentTimeForUpgrade += unit.GetDamage();
+
+        if (CurrentTimeForUpgrade >= _finishTimeForUpgrade)
+        {
+            unit.FinishedTask();
+
+            CheckHouse();
+        }
     }
 
     private void CheckCurrentTime()
     {
-        _currentTimeForUpgrade += Time.deltaTime;
+        CurrentTimeForUpgrade += Time.deltaTime;
 
-        _onChangeTimeForUpgrade?.Invoke(_currentTimeForUpgrade, _finishTimeForUpgrade, true);
+        _onChangeTimeForUpgrade?.Invoke(CurrentTimeForUpgrade, _finishTimeForUpgrade, true);
 
-        if (_currentTimeForUpgrade >= _finishTimeForUpgrade)
-            CheckHouse();
+        if (CurrentTimeForUpgrade >= _finishTimeForUpgrade)
+        {
+            _distributeTasks.DistributeTasks(this);
 
+            PayForTheBuild();
+
+            ReloadAction();
+        }
     }
 
     private void CheckHouse()
@@ -71,52 +101,34 @@ public class ControleHouse : MonoBehaviour
 
     private void UpgradeHouse()
     {
-        _houseObj.LevelUp();
+        _houseObj.LevelUp();       
 
+        ReloadAction();
+    }
+
+    private void PayForTheBuild()
+    {
         _player.WantPay().Pay(_priceForUpgrade);
 
         _priceForUpgrade += _priceForUpgrade / 3;
-
-        ReloadAction();
     }
 
     private void ReloadAction()
     {
-        _currentTimeForUpgrade = 0f;
+        CurrentTimeForUpgrade = 0f;
 
         _isUpgraded = false;
 
-        _onChangeTimeForUpgrade?.Invoke(_currentTimeForUpgrade, _finishTimeForUpgrade, false);
+        _onChangeTimeForUpgrade?.Invoke(CurrentTimeForUpgrade, _finishTimeForUpgrade, false);
     }
 
     private void BuildHouse()
-    {
-        _player.WantPay().Pay(_priceBuildHouse);
+    {       
+        _houseObj.gameObject.SetActive(true);
+
+        _sizeCountry.AddHouse(_houseObj);
 
         ReloadAction();
-
-        StartCoroutine(CreateHouse());
-    }
-
-    private IEnumerator CreateHouse()
-    {
-        _currentTimerCreater = _timerCreater;
-
-        while (true)
-        {
-            _currentTimerCreater -= Time.deltaTime;
-
-            if (_currentTimerCreater <= 0f)
-            {
-                _houseObj.gameObject.SetActive(true);
-
-                _sizeCountry.AddHouse(_houseObj);
-
-                break;
-            }
-
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -126,13 +138,13 @@ public class ControleHouse : MonoBehaviour
         if (player != null)
         {
             _isImprovable = true;
-          
+
             _player = player;
 
             if (_houseObj.gameObject.activeSelf)
                 _onDisplayInfoHouse?.Invoke(_houseObj.NameHouse, _houseObj.LevelHouse.ToString(), _houseObj.HealthHouse.ToString(), true);
         }
-    }    
+    }
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -144,8 +156,6 @@ public class ControleHouse : MonoBehaviour
 
             if (_houseObj.gameObject.activeSelf)
                 _onDisplayInfoHouse?.Invoke("", "", "", false);
-
-            _player = null;
         }
     }
 }

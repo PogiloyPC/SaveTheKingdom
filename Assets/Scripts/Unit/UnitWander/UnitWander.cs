@@ -61,7 +61,7 @@ public class UnitWander : Unit
 
         if (money != null)
         {
-            Destroy(money.gameObject);
+            money.gameObject.SetActive(false);
 
             UnitCitizen unitPatrial = Instantiate(BecomePatrial(), transform.position, Quaternion.identity);
 

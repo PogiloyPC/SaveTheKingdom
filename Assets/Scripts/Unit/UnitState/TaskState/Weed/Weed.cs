@@ -1,30 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnitStruct;
 
 public class Weed : TaskState
 {
-    private Farmer _unit;
-
     private Animator _anim;
 
-    private Vector3 _posField => _unit.PosWork;
+    private Transform _transformUnit;
+
+    private IWorkInField _unit;
+
+    private Vector3 _posField => _unit.PosWork();
 
     private bool _isWorked;
 
-    public Weed(Farmer unit, Animator anim)
+    private float _speed;
+
+    public Weed(IWorkInField unit, Animator anim, Transform transform, float speed)
     {
         _unit = unit;
 
-        _anim = anim;        
+        _anim = anim;
+
+        _transformUnit = transform;
+
+        _speed = speed;
     }
 
     public override void EnterState()
     {
-        if (_unit.transform.position.x > _posField.x)
-            _unit.transform.localScale = new Vector3(-1f, 1f, 1f);
+        if (_transformUnit.position.x > _posField.x)
+            _transformUnit.localScale = new Vector3(-1f, 1f, 1f);
         else
-            _unit.transform.localScale = new Vector3(1f, 1f, 1f);
+            _transformUnit.localScale = new Vector3(1f, 1f, 1f);
 
         _anim.SetBool("run", true);
     }
@@ -38,17 +45,17 @@ public class Weed : TaskState
 
     public override void PlayState()
     {
-        if (_unit.transform.position.x != _posField.x)
+        if (_transformUnit.position.x != _posField.x)
         {
-            _unit.transform.position = Vector3.MoveTowards(_unit.transform.position, 
-                new Vector3(_posField.x, _unit.transform.position.y, 0f), _unit.Speed * Time.deltaTime);
+            _transformUnit.position = Vector3.MoveTowards(_transformUnit.position,
+                new Vector3(_posField.x, _transformUnit.position.y, 0f), _speed * Time.deltaTime);
         }
-        else if(!_isWorked)
+        else if (!_isWorked)
         {
             _isWorked = true;
 
             _anim.SetBool("run", false);
             _anim.SetBool("work", true);
-        }            
+        }
     }
 }

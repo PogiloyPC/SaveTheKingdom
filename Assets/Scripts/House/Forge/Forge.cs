@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PlayerModification;
+using StructHouse;
 
 public class Forge : House, IChangeActive
 {
@@ -40,7 +41,7 @@ public class Forge : House, IChangeActive
 
     private void ActivateShopForge()
     {        
-        for (int i = 0; i < _maxCellsShop + Mathf.Clamp(LevelHouse, 0, _maxCellsShop); i++)
+        for (int i = 0; i < _maxCellsShop + Mathf.Clamp(LevelHouse, 0, _maxCellsShop + 1); i++)
             _cellsBuyObjects[i].SetActive(this);
     }
 

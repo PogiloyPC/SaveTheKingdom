@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using PlayerModification;
 using PlayerModification.Wallet;
+using CountryModifi;
 
 public class Player : MonoBehaviour, IBuyer
 {
@@ -26,7 +27,19 @@ public class Player : MonoBehaviour, IBuyer
     private PlayerAnimation _animation;
     private PlayerState _state;
 
+    [Header("Task")]
+    [SerializeField] private float _radiuseCircleTask;
+
+    [SerializeField] private LayerMask _taskMask;
+
+    [SerializeField] private Transform _posCircleTask;
+
+    [SerializeField] private Country _distributeTasks;
+
+    private IssueATask _issueATask;
+
     [SerializeField] private Money _moneyChit;
+
 
     private void Start()
     {
@@ -34,6 +47,8 @@ public class Player : MonoBehaviour, IBuyer
         _animation = new PlayerAnimation(_anim, transform);
         _moving = new PlayerMoving(_rb, _speed, _forceJump);
         _state = new PlayerState(_posGroundPoint, _radiusCircle, _groundLayer);
+
+        _issueATask = new IssueATask(_posCircleTask, _radiuseCircleTask, _taskMask);
     }
 
     private void Update()
@@ -46,6 +61,30 @@ public class Player : MonoBehaviour, IBuyer
 
         if (Input.GetKeyDown(KeyCode.M))
             _wallet.GetMoney(_moneyChit);
+
+        if (Input.GetKeyDown(KeyCode.X))
+            DeliverTheTask();
+    }
+
+    private void DeliverTheTask()
+    {
+        _distributeTasks.DistributeTasks(_issueATask.LookForTaks());
+    }    
+
+    public IWantPay WantPay()
+    {
+        return _wallet;
+    }
+
+    public int MoneyCount()
+    {
+        return _wallet.MoneyCount;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(_posCircleTask.position, _radiuseCircleTask);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -58,15 +97,5 @@ public class Player : MonoBehaviour, IBuyer
 
             moneyPlayer.gameObject.SetActive(false);
         }
-    }
-
-    public IWantPay WantPay()
-    {
-        return _wallet;
-    }
-
-    public int MoneyCount()
-    {
-        return _wallet.MoneyCount;
     }
 }
