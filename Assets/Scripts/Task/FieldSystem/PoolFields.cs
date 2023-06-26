@@ -3,7 +3,7 @@ using UnityEngine;
 using StructHouse;
 using UnitStruct;
 
-public class FieldsControle<T, U> : IReturn<T> where T : IWorkInField where U : IHaveField
+public class PoolFields<T, U> : IReturn<T> where T : IWorkInField where U : IHaveField
 {
     private Queue<T> _freeCitizens = new Queue<T>();
     private Queue<Vector3> _fields = new Queue<Vector3>();

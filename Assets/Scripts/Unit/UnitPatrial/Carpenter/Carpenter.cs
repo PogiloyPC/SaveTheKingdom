@@ -2,10 +2,11 @@ using UnityEngine;
 using System;
 using UnitStruct;
 using StructHouse;
+using InterfaceTask;
 
 public class Carpenter : UnitCitizen, ICompleteTheTask<ControleHouse>, ITasker
 {
-    private ControleHouse _building = null;
+    private ITask _building = null;
 
     private Action<Carpenter> _onDead;
     private Action<Carpenter> _onCompleteTask;
@@ -26,7 +27,7 @@ public class Carpenter : UnitCitizen, ICompleteTheTask<ControleHouse>, ITasker
         if (_isWorked && Countr.CurrentDayTime <= 0.6f)
         {
             if (GetTaskState() is CompleteTaskCountry task)
-                task.LookTaskPos(_building.transform.position);
+                task.LookTaskPos(_building.MyPos());
 
             GetStateMachineUnit().ChangeState(GetTaskState());
         }
@@ -70,9 +71,9 @@ public class Carpenter : UnitCitizen, ICompleteTheTask<ControleHouse>, ITasker
         _onDead += _taskControle.Return;
     }
 
-    public ControleHouse GetTask()
+    public ControleHouse ReturnTask()
     {
-        return _building;
+        return (ControleHouse)_building;
     }
 
     public void TakeTask(ControleHouse task)

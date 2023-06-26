@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4223410791859858693}
   - component: {fileID: 4223410791859858709}
   - component: {fileID: 4223410791859858715}
-  - component: {fileID: 4223410791859858663}
   - component: {fileID: 4223410791859858712}
-  m_Layer: 8
+  - component: {fileID: 4509573686674997497}
+  m_Layer: 10
   m_Name: Farmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4223410791859858693
 SpriteRenderer:
@@ -125,23 +125,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4223410791859858663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223410791859858713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9e0dd7c5e4529a4f9e0b26580a52135, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _anim: {fileID: 4223410791859858712}
-  _speed: 1
-  _id: 0
-  _posWork: {x: 0, y: 0, z: 0}
-  _haveField: 0
 --- !u!95 &4223410791859858712
 Animator:
   serializedVersion: 4
@@ -162,3 +145,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4509573686674997497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223410791859858713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78e5d73947485f4b9e4e36ad2d97e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 4223410791859858712}
+  _speed: 1
+  _typeUnit: 4
+  _id: 0
+  _damage: 0.2
+  _isWorked: 0

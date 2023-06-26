@@ -1,47 +1,39 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StructHouse;
+using CountryModifi;
 
-public class Farm : House, IHaveField
-{   
-    private List<Vector3> _field = new List<Vector3>();   
+public class Farm : House
+{
+    [SerializeField] private List<Weed> _fieldWeed;
 
-    [SerializeField] private int _countField;   
+    private List<Vector3> _fields = new List<Vector3>();
 
-    private IGetHouseFields _country;
-    
+    [SerializeField] private int _countField;
+
+    private IDeliveryTask _country;
+
     private void OnEnable()
     {
         Field();
 
         _country = GameObject.Find("Country").GetComponent<Country>();
 
-        _country.GetFields(this);
-    }    
+        for (int i = 0; i < _fieldWeed.Count; i++)
+            _country.DeliveryTask(_fieldWeed[i]);
+    }
 
     private void Field()
     {
         for (int i = 0; i < _countField / 2; i++)
-        {            
-            _field.Add(transform.position + new Vector3(i + 0.5f, -0.5f, 0f));
+        {
+            _fields.Add(transform.position + new Vector3(i + 0.5f, -0.5f, 0f));
+            _fields.Add(transform.position + new Vector3(-i - 0.5f, -0.5f, 0f));
         }
 
-        for (int i = 0; i < _countField / 2; i++)
-        {
-            _field.Add(transform.position + new Vector3(-i - 0.5f, -0.5f, 0f));
-        }        
-    }
-
-    public List<Vector3> Fields()
-    {
-        return _field;
-    }
-
-    public int CountFields()
-    {
-        return _countField;
-    }
+        for (int i = 0; i < _fieldWeed.Count; i++)
+            _fieldWeed[i].transform.position = _fields[i];
+    }   
 
     private void OnDrawGizmos()
     {
@@ -52,10 +44,6 @@ public class Farm : House, IHaveField
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(transform.position + new Vector3(i + 0.5f, -0.5f, 0f), new Vector2(1, 0.1f));
-        }
-
-        for (int i = 0; i < _countField / 2; i++)
-        {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireCube(transform.position + new Vector3(-i - 0.5f, -0.5f, 0f), new Vector2(1, 0.1f));
         }

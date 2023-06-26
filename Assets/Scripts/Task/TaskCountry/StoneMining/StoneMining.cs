@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnitStruct;
+using InterfaceTask;
 
 public class StoneMining : TaskCountry
 {
@@ -18,7 +19,7 @@ public class StoneMining : TaskCountry
 
             TaskComplete();
         }
-    }
+    }    
 
     private void TaskComplete()
     {

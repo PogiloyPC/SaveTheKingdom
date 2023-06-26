@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using StructHouse;
 using UnitStruct;
+using InterfaceTask;
 
-public class TaskControle<T, U> : IReturnUnit<T> where T : ICompleteTheTask<U> where U : TaskCountry
+public class PoolTasks<T, U> : IReturnUnit<T> where T : ICompleteTheTask<U> where U : ITask
 {
     private Queue<T> _freeCitizens = new Queue<T>();
     private Queue<U> _tasks = new Queue<U>();
@@ -45,14 +46,14 @@ public class TaskControle<T, U> : IReturnUnit<T> where T : ICompleteTheTask<U> w
             {
                 _citizens.Add(_freeCitizens.Peek());
 
-                _freeCitizens.Dequeue().TakeTask(_tasks.Dequeue());                
+                _freeCitizens.Dequeue().TakeTask(_tasks.Dequeue());
             }
         }
     }
 
     public void Return(T unit)
     {
-        _tasks.Enqueue(unit.GetTask());
+        _tasks.Enqueue(unit.ReturnTask());
 
         OnCheckUnit(unit);
     }
@@ -68,7 +69,7 @@ public class TaskControle<T, U> : IReturnUnit<T> where T : ICompleteTheTask<U> w
 
     private void OnCheckUnit(T unit)
     {
-        _citizens.Remove(unit);        
+        _citizens.Remove(unit);
 
         CheckFreeTask();
     }

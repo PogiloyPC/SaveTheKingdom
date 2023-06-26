@@ -2,10 +2,11 @@ using UnityEngine;
 using System;
 using UnitStruct;
 using StructHouse;
+using InterfaceTask;
 
 public class Lumberman : UnitCitizen, ICompleteTheTask<Cutting>, ITasker
 {
-    private Cutting _cutting;
+    private ITask _cutting;
 
     private Action<Lumberman> _onDead;
     private Action<Lumberman> _onCompleteTask;
@@ -26,7 +27,7 @@ public class Lumberman : UnitCitizen, ICompleteTheTask<Cutting>, ITasker
         if (_isWorked && Countr.CurrentDayTime <= 0.6f)
         {
             if (GetTaskState() is CompleteTaskCountry task)            
-                task.LookTaskPos(_cutting.gameObject.transform.position);            
+                task.LookTaskPos(_cutting.MyPos());            
 
             GetStateMachineUnit().ChangeState(GetTaskState());
         }
@@ -70,9 +71,9 @@ public class Lumberman : UnitCitizen, ICompleteTheTask<Cutting>, ITasker
         _onDead += _taskControle.Return;
     }
 
-    public Cutting GetTask()
+    public Cutting ReturnTask()
     {
-        return _cutting;
+        return (Cutting)_cutting;
     }
 
     public void TakeTask(Cutting task)

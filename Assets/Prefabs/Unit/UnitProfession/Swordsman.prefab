@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 724759477756913269}
   - component: {fileID: 724759477756913260}
   - component: {fileID: 724759477756913261}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Swordsman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 724759477756913261}
   _speed: 1
+  _typeUnit: 0
   _id: 0
 --- !u!95 &724759477756913261
 Animator:

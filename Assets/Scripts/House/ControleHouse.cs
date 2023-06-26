@@ -4,72 +4,73 @@ using UnityEngine.Events;
 using PlayerModification;
 using CountryModifi;
 using UnitStruct;
+using InterfaceTask;
 
-public class ControleHouse : TaskCountry
+public class ControleHouse : MonoBehaviour, ITask
 {
     [SerializeField] private House _houseObj;
-
-    [SerializeField] private float _finishTimeForUpgrade;
-    public float CurrentTimeForUpgrade { get; private set; }
-    public float FinishTime { get { return _finishTimeForUpgrade; } private set { } }
-
-    [SerializeField] private int _priceBuildHouse;
-    [SerializeField] private int _priceForUpgrade;
 
     [SerializeField] private UnityEvent<float, float, bool> _onChangeTimeForUpgrade;
     [SerializeField] private UnityEvent<string, string, string, bool> _onDisplayInfoHouse;
 
-    private bool _isImprovable;
-    private bool _isUpgraded;
+    private SizeCountry _sizeCountry;
 
     private IBuyer _player;
 
-    private IDistributeTasks _distributeTasks;
+    private IDeliveryTask _devileryTasks;
 
-    private SizeCountry _sizeCountry;
+    [SerializeField] private float _buildingTimeFinish;
+    private float _buildingTimeCurrent;
+    [SerializeField] private float _finishTimeBuy;
+    private float _currentTimeBuy;
+    [SerializeField] private float _radiusCircle;
+    [SerializeField] private LayerMask _maskLayer;
+
+    [SerializeField] private int _priceForBuild;
+
+    private bool _isImprovable;
+    private bool _isUpgraded;
+    private bool _isBuilding;
+    private bool _spaceClear;
 
     private void Start()
     {
         _sizeCountry = GameObject.Find("SizeCountry").GetComponent<SizeCountry>();
 
-        _distributeTasks = GameObject.Find("Country").GetComponent<Country>();
+        _devileryTasks = GameObject.Find("Country").GetComponent<Country>();
     }
 
     private void OnMouseDown()
     {
-        if (_player.MoneyCount() >= _priceForUpgrade)
+        if (_player.MoneyCount() >= _priceForBuild && !_isBuilding)
             _isUpgraded = true;
     }
 
     private void OnMouseDrag()
     {
-        if (_isImprovable && _isUpgraded)
+        if (_isImprovable && _isUpgraded && _spaceClear)
             CheckCurrentTime();
     }
 
     private void OnMouseUp()
     {
-        if (CurrentTimeForUpgrade >= _finishTimeForUpgrade)
-        {
-            _distributeTasks.DistributeTasks(this);
-
-            PayForTheBuild();
-
-            ReloadAction();
-        }
+        if (_currentTimeBuy >= _finishTimeBuy)
+            MarkTask();
         else
-        {
             ReloadAction();
-        }
     }
 
-    public override void CompleteTheTask(ITasker unit)
+    public void CompleteTheTask(ITasker unit)
     {
-        CurrentTimeForUpgrade += unit.GetDamage();
+        _buildingTimeCurrent += unit.GetDamage();
 
-        if (CurrentTimeForUpgrade >= _finishTimeForUpgrade)
+        if (_buildingTimeCurrent >= _buildingTimeFinish)
         {
             unit.FinishedTask();
+
+            _isBuilding = false;
+
+            _buildingTimeCurrent = 0f;
 
             CheckHouse();
         }
@@ -77,18 +78,23 @@ public class ControleHouse : TaskCountry
 
     private void CheckCurrentTime()
     {
-        CurrentTimeForUpgrade += Time.deltaTime;
+        _currentTimeBuy += Time.deltaTime;
 
-        _onChangeTimeForUpgrade?.Invoke(CurrentTimeForUpgrade, _finishTimeForUpgrade, true);
+        _onChangeTimeForUpgrade?.Invoke(_currentTimeBuy, _finishTimeBuy, true);
 
-        if (CurrentTimeForUpgrade >= _finishTimeForUpgrade)
-        {
-            _distributeTasks.DistributeTasks(this);
+        if (_currentTimeBuy >= _finishTimeBuy)
+            MarkTask();
+    }
 
-            PayForTheBuild();
+    private void MarkTask()
+    {
+        _devileryTasks.DeliveryTask(this);
 
-            ReloadAction();
-        }
+        _isBuilding = true;
+
+        PayForTheBuild();
+
+        ReloadAction();
     }
 
     private void CheckHouse()
@@ -97,38 +103,54 @@ public class ControleHouse : TaskCountry
             UpgradeHouse();
         else
             BuildHouse();
+
+        _buildingTimeFinish += 0.5f;
     }
 
     private void UpgradeHouse()
     {
-        _houseObj.LevelUp();       
+        _houseObj.LevelUp();
 
         ReloadAction();
     }
 
-    private void PayForTheBuild()
-    {
-        _player.WantPay().Pay(_priceForUpgrade);
-
-        _priceForUpgrade += _priceForUpgrade / 3;
-    }
-
-    private void ReloadAction()
-    {
-        CurrentTimeForUpgrade = 0f;
-
-        _isUpgraded = false;
-
-        _onChangeTimeForUpgrade?.Invoke(CurrentTimeForUpgrade, _finishTimeForUpgrade, false);
-    }
-
     private void BuildHouse()
-    {       
+    {
         _houseObj.gameObject.SetActive(true);
 
         _sizeCountry.AddHouse(_houseObj);
 
         ReloadAction();
+    }
+
+    private void ReloadAction()
+    {
+        _currentTimeBuy = 0f;
+
+        _isUpgraded = false;
+
+        _onChangeTimeForUpgrade?.Invoke(_currentTimeBuy, _finishTimeBuy, false);
+    }
+
+    private void PayForTheBuild()
+    {
+        _player.WantPay().Pay(_priceForBuild);
+
+        _priceForBuild += _priceForBuild / 3;
+    }
+
+    public Vector3 MyPos() => transform.position;
+
+    private void CheckSpace()
+    {
+        Collider2D collide = Physics2D.OverlapCircle(_houseObj.transform.position, _radiusCircle, _maskLayer);
+
+        ISurroinding task = collide?.gameObject.GetComponent<TaskCountry>();
+
+        if (task != null)
+            _spaceClear = false;
+        else
+            _spaceClear = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -140,6 +162,8 @@ public class ControleHouse : TaskCountry
             _isImprovable = true;
 
             _player = player;
+
+            CheckSpace();
 
             if (_houseObj.gameObject.activeSelf)
                 _onDisplayInfoHouse?.Invoke(_houseObj.NameHouse, _houseObj.LevelHouse.ToString(), _houseObj.HealthHouse.ToString(), true);
@@ -154,8 +178,16 @@ public class ControleHouse : TaskCountry
         {
             _isImprovable = false;
 
+            CheckSpace();
+
             if (_houseObj.gameObject.activeSelf)
                 _onDisplayInfoHouse?.Invoke("", "", "", false);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(_houseObj.transform.position, _radiusCircle);
     }
 }

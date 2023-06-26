@@ -4,14 +4,14 @@ using UnitStruct;
 using StructHouse;
 using InterfaceTask;
 
-public class Bricklayer : UnitCitizen, ICompleteTheTask<StoneMining>, ITasker
-{
+public class UnitCitizenTask : UnitCitizen, ICompleteTheTask<ITask>, ITasker
+{    
+    private Action<UnitCitizenTask> _onDead;
+    private Action<UnitCitizenTask> _onCompleteTask;
+
     private ITask _stoneMining = null;
 
-    private Action<Bricklayer> _onDead;
-    private Action<Bricklayer> _onCompleteTask;
-
-    private IReturnUnit<Bricklayer> _taskControle;
+    private IReturnUnit<UnitCitizenTask> _taskControle;
 
     [SerializeField, Range(0f, 1f)] private float _damage;
 
@@ -26,9 +26,9 @@ public class Bricklayer : UnitCitizen, ICompleteTheTask<StoneMining>, ITasker
     {
         if (_isWorked && Countr.CurrentDayTime <= 0.6f)
         {
-            if (GetTaskState() is CompleteTaskCountry task)            
+            if (GetTaskState() is CompleteTaskCountry task)
                 task.LookTaskPos(_stoneMining.MyPos());
-            
+
             GetStateMachineUnit().ChangeState(GetTaskState());
         }
         else
@@ -60,10 +60,10 @@ public class Bricklayer : UnitCitizen, ICompleteTheTask<StoneMining>, ITasker
 
     public void DoingTask()
     {
-        _stoneMining.CompleteTheTask(this);       
+        _stoneMining.CompleteTheTask(this);
     }
 
-    public void GetTaskControle(IReturnUnit<Bricklayer> taskControle)
+    public void GetTaskControle(IReturnUnit<UnitCitizenTask> taskControle)
     {
         _taskControle = taskControle;
 
@@ -71,12 +71,12 @@ public class Bricklayer : UnitCitizen, ICompleteTheTask<StoneMining>, ITasker
         _onDead += _taskControle.Return;
     }
 
-    public StoneMining ReturnTask()
+    public ITask ReturnTask()
     {
-        return (StoneMining)_stoneMining;
+        return _stoneMining;
     }
 
-    public void TakeTask(StoneMining task)
+    public void TakeTask(ITask task)
     {
         _stoneMining = task;
 

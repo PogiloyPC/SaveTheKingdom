@@ -19,7 +19,7 @@ public class Fisher : UnitCitizen, IWorkInField
 
     protected override void StartCitizenUnit()
     {
-        InitState(new Weed(this, GetComponent<Animator>(), transform, Speed), new MoveState(this, GetComponent<Animator>()));
+        InitState(new FieldWorkState(this, GetComponent<Animator>(), transform, Speed), new MoveState(this, GetComponent<Animator>()));
     }
 
     private void Update()

@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnitStruct;
 
 public abstract class UnitCitizen : Unit
-{    
+{
+    [SerializeField] private TypeUnitCitizen _typeUnit;
+    public TypeUnitCitizen TypeUnit { get { return _typeUnit; } private set { } }
+
     private Country _country;
     protected Country Countr => _country;
 

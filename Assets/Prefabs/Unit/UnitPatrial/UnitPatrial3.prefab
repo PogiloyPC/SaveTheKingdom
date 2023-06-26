@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4381859442168841658}
   - component: {fileID: 4381859442168841601}
   - component: {fileID: 5235667713297554513}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: UnitPatrial3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,4 +159,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 4381859442168841601}
   _speed: 1
+  _typeUnit: 0
   _id: 0

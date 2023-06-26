@@ -1,4 +1,3 @@
-using UnityEngine;
 using PlayerModification.Wallet;
 
 namespace PlayerModification
@@ -8,6 +7,11 @@ namespace PlayerModification
         public IWantPay WantPay();
 
         public int MoneyCount();
+    }
+
+    public interface IMarkATask
+    {
+        public bool MarkTask();
     }
 
     namespace Wallet

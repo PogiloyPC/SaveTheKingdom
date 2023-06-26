@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5556478310832369246}
   - component: {fileID: 5556478310832369222}
   - component: {fileID: 5556478310832369223}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Spearman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 5556478310832369223}
   _speed: 1
+  _typeUnit: 0
   _id: 0
 --- !u!95 &5556478310832369223
 Animator:

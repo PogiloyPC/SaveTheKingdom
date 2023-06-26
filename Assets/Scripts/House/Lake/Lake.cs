@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StructHouse;
+using CountryModifi;
 
-public class Lake : House, IHaveField
+public class Lake : House
 {
-    [SerializeField] private Transform[] _pos;
+    [SerializeField] private List<Fishing> _fieldWeed;
 
-    [SerializeField, Range(0, 1)] private float _offset;
-
-    private List<Vector3> _field = new List<Vector3>();
+    private List<Vector3> _fields = new List<Vector3>();
 
     [SerializeField] private int _countField;
 
-    private IGetHouseFields _country;
+    private IDeliveryTask _country;
 
     private void OnEnable()
     {
@@ -21,30 +20,20 @@ public class Lake : House, IHaveField
 
         _country = GameObject.Find("Country").GetComponent<Country>();
 
-        _country.GetFields(this);
+        for (int i = 0; i < _fieldWeed.Count; i++)
+            _country.DeliveryTask(_fieldWeed[i]);
     }
 
     private void Field()
     {
         for (int i = 0; i < _countField / 2; i++)
         {
-            _field.Add(transform.position + new Vector3(i - 0.75f, -0.5f, 0f));
+            _fields.Add(transform.position + new Vector3(i - 0.25f, -0.5f, 0f));
+            _fields.Add(transform.position + new Vector3(-i + 0.25f, -0.5f, 0f));
         }
 
-        for (int i = 0; i < _countField / 2; i++)
-        {
-            _field.Add(transform.position + new Vector3(-i + 0.75f, -0.5f, 0f));
-        }       
-    }
-
-    public List<Vector3> Fields()
-    {
-        return _field;
-    }
-
-    public int CountFields()
-    {
-        return _countField;
+        for (int i = 0; i < _fieldWeed.Count; i++)
+            _fieldWeed[i].transform.position = _fields[i];
     }
 
     private void OnDrawGizmos()
@@ -55,13 +44,9 @@ public class Lake : House, IHaveField
         for (int i = 0; i < _countField / 2; i++)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(transform.position + new Vector3(i - 0.75f, -0.5f, 0f), new Vector2(0.25f, 0.1f));
-        }
-
-        for (int i = 0; i < _countField / 2; i++)
-        {
+            Gizmos.DrawWireCube(transform.position + new Vector3(i - 0.25f, -0.5f, 0f), new Vector2(0.5f, 0.1f));
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(transform.position + new Vector3(-i + 0.75f, -0.5f, 0f), new Vector2(0.25f, 0.1f));
+            Gizmos.DrawWireCube(transform.position + new Vector3(-i + 0.25f, -0.5f, 0f), new Vector2(0.5f, 0.1f));
         }
     }
 }

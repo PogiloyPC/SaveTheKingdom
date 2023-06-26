@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnitStruct;
 
-public class Weed : TaskState
+public class FieldWorkState : TaskState
 {
     private Animator _anim;
 
@@ -15,7 +15,7 @@ public class Weed : TaskState
 
     private float _speed;
 
-    public Weed(IWorkInField unit, Animator anim, Transform transform, float speed)
+    public FieldWorkState(IWorkInField unit, Animator anim, Transform transform, float speed)
     {
         _unit = unit;
 

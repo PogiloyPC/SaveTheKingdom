@@ -14,13 +14,13 @@ public class Player : MonoBehaviour, IBuyer
 
     [SerializeField] private UnityEvent<float> _onChangeMoney;
 
+    [SerializeField] private BuyUnit _buyUnit;
+    
+    [SerializeField] private LayerMask _groundLayer;
+
     [SerializeField] private float _speed;
     [SerializeField] private float _forceJump;
     [SerializeField] private float _radiusCircle;
-
-    [SerializeField] private LayerMask _groundLayer;
-
-    [SerializeField] private BuyUnit _buyUnit;
 
     private PlayerWallet _wallet;
     private PlayerMoving _moving;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour, IBuyer
 
     [SerializeField] private Transform _posCircleTask;
 
-    [SerializeField] private Country _distributeTasks;
+    [SerializeField] private IDeliveryTask _deliveriTask;
 
     private IssueATask _issueATask;
 
@@ -47,6 +47,8 @@ public class Player : MonoBehaviour, IBuyer
         _animation = new PlayerAnimation(_anim, transform);
         _moving = new PlayerMoving(_rb, _speed, _forceJump);
         _state = new PlayerState(_posGroundPoint, _radiusCircle, _groundLayer);
+
+        _deliveriTask = GameObject.Find("Country").GetComponent<Country>();
 
         _issueATask = new IssueATask(_posCircleTask, _radiuseCircleTask, _taskMask);
     }
@@ -62,13 +64,15 @@ public class Player : MonoBehaviour, IBuyer
         if (Input.GetKeyDown(KeyCode.M))
             _wallet.GetMoney(_moneyChit);
 
+        _issueATask.TaskSearched();
+
         if (Input.GetKeyDown(KeyCode.X))
-            DeliverTheTask();
+            FindTask();
     }
 
-    private void DeliverTheTask()
+    private void FindTask()
     {
-        _distributeTasks.DistributeTasks(_issueATask.LookForTaks());
+        _deliveriTask.DeliveryTask(_issueATask.LookForTaks());
     }    
 
     public IWantPay WantPay()

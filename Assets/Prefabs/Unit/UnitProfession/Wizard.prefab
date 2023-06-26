@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4360928806940343693}
   - component: {fileID: 4360928806940343409}
   - component: {fileID: 4360928806940343694}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Wizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 4360928806940343694}
   _speed: 1
+  _typeUnit: 0
   _id: 0
 --- !u!95 &4360928806940343694
 Animator:

@@ -14,7 +14,7 @@ namespace UnitStruct
     {
         public void TakeTask(T t);
 
-        public T GetTask();
+        public T ReturnTask();
     }
 
     public interface ITasker
@@ -22,5 +22,19 @@ namespace UnitStruct
         public void FinishedTask();
 
         public float GetDamage();
+    }
+
+    public enum TypeUnitCitizen
+    {
+        UnitCitizen,
+        Bricklayer,
+        Carpenter,
+        Lumberman,
+        Farmer,
+        Fisher,
+        Swordman,
+        Archer,
+        Wizard,
+        Spearman
     }
 }

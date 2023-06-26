@@ -9,12 +9,7 @@ namespace StructHouse
         public int CountFields();
 
         public List<Vector3> Fields();
-    }
-
-    public interface IGetHouseFields
-    {
-        public void GetFields(IHaveField fields);
-    }
+    }   
 
     public interface IReturn<T>
     {
@@ -34,6 +29,5 @@ namespace StructHouse
     public interface IChangeActive
     {
         public bool OnSwitchObject();
-    }
-
+    }    
 }
