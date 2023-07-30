@@ -4,45 +4,55 @@ using UnityEngine;
 
 public class UnitWander : Unit
 {
-    [SerializeField, Range(0, 2)] private float _maxDistanceWander;
-    [SerializeField, Range(0, 5)] private float _radiusCircle;
-
     [SerializeField] private UnitCitizen[] _unitPatrial;
 
     [SerializeField] private GameObject _unitTransformationParticle;
 
     [SerializeField] private LayerMask _moneyMask;
 
-    private Vector3 _startPosWander;   
+    private Vector3 _startPosWander;
+
+    [SerializeField, Range(0, 2)] private float _maxDistanceWander;
+    [SerializeField, Range(0, 5)] private float _radiusCircle;
 
     protected override void StartUnit()
     {
         _startPosWander = transform.position;
 
-        InitState(new FollowObjectState(this, GetComponent<Animator>()), new MoveState(this, GetComponent<Animator>()));
+        InitState(new FollowObjectState(this, GetComponent<Animator>()), new MoveState(this, GetComponent<Animator>()),
+            new EscapeState(transform, GetComponent<Animator>(), LayerEnemy, Speed, RadiusCircleEnemy));
     }
 
     private void Update()
+    {
+        CheckState();
+
+        GetStateMachineUnit().Update();
+    }
+
+    private void CheckState()
     {
         Collider2D collide = Physics2D.OverlapCircle(transform.position, _radiusCircle, _moneyMask);
 
         MoneyPlayer money = collide?.gameObject.GetComponent<MoneyPlayer>();
 
-        if (money != null)
+        if (CheckEnemy() || GetStateUnitWithEnemy().Aghast())
+        {
+            GetStateMachineUnit().ChangeState(GetStateUnitWithEnemy());
+        }
+        else if (money != null)
         {
             if (GetTaskState() is FollowObjectState followObject)
             {
-                followObject.LookObject(money.transform.position);
+                followObject.LookObject(money.MyPos());
 
                 GetStateMachineUnit().ChangeState(GetTaskState());
             }
         }
         else
         {
-                GetStateMachineUnit().ChangeState(GetMoveState());
-        }           
-
-                GetStateMachineUnit().Update();
+            GetStateMachineUnit().ChangeState(GetMoveState());
+        }
     }
 
     public override Vector3 LeftBorders()

@@ -1,4 +1,6 @@
 using PlayerModification.Wallet;
+using PoolInterface;
+using StructHouse;
 
 namespace PlayerModification
 {
@@ -11,7 +13,7 @@ namespace PlayerModification
 
     public interface IMarkATask
     {
-        public bool MarkTask();
+        public bool MarkTask();        
     }
 
     namespace Wallet
@@ -23,7 +25,20 @@ namespace PlayerModification
 
         public interface IGetMoney
         {
-            public void GetMoney(Money money);
+            public void GetMoney(IHaveMoney money);
         }         
+    }
+}
+
+namespace PoolInterface
+{
+    public interface IHaveMoney
+    {
+        public int GiveMoney();
+    }
+
+    public interface IReturnable<T>
+    {
+        public void GetT(IReturn<T> pool);
     }
 }

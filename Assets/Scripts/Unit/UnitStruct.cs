@@ -1,5 +1,6 @@
 using UnityEngine;
 using StructHouse;
+using InterfaceTask;
 
 namespace UnitStruct 
 {
@@ -22,6 +23,15 @@ namespace UnitStruct
         public void FinishedTask();
 
         public float GetDamage();
+    }
+
+    public interface IWarrion
+    {
+        public void GetPosPost(IGeneratorPosPost generator);
+
+        public Vector3 PosPost();
+
+        public Vector3 MyPos();
     }
 
     public enum TypeUnitCitizen

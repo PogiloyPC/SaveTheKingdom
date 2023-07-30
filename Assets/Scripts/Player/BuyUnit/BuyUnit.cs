@@ -7,18 +7,21 @@ public class BuyUnit : MonoBehaviour
 
     [SerializeField] private List<MoneyPlayer> _moneys;
 
-    [SerializeField] private float _forceDropMoney;
-
     [SerializeField] private Transform _posDropMoney;
     [SerializeField] private Transform _container;
 
-    [SerializeField] private bool _isAoutomatic;
-
     private PoolObjects<MoneyPlayer> _poolMoney;
+
+    [SerializeField] private float _forceDropMoney;
+
+    [SerializeField] private int _countObjectsinStart;    
+
+    [SerializeField] private bool _isAoutomatic;
+    [SerializeField] private bool _createInStartObjects;
 
     private void Start()
     {
-        _poolMoney = new PoolObjects<MoneyPlayer>(_moneys, _container, _isAoutomatic, _money);
+        _poolMoney = new PoolObjects<MoneyPlayer>(_container, _isAoutomatic, _money, _createInStartObjects, _countObjectsinStart);        
     }
 
     public void DropMoney(PlayerWallet wallet)
@@ -34,5 +37,5 @@ public class BuyUnit : MonoBehaviour
                     ForceMode2D.Impulse);
             }
         }
-    }
+    }    
 }

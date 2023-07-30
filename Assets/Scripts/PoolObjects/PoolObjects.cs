@@ -1,64 +1,78 @@
-using System.Collections;
 using System.Collections.Generic;
+using SystemObject;
 using UnityEngine;
+using StructHouse;
+using PoolInterface;
 
-public class PoolObjects<T> where T : MonoBehaviour
+public class PoolObjects<T> : IReturn<T>, IChangeActiveObject where T : MonoBehaviour, IReturnable<T>, ISetActiveObject
 {
-    private List<T> _projects;   
+    private Queue<T> _projectails = new Queue<T>();
 
     private Transform _transformList;
 
     private T _prefab;
 
-    private bool _isAutomatic;    
+    private bool _isAutomatic;
 
-    public PoolObjects(List<T> projects, Transform pos, bool isAutomatic, T prefab)
+    public PoolObjects(Transform pos, bool isAutomatic, T prefab, bool createInStart, int countObjects)
     {
-        _projects = projects;
-
         _transformList = pos;
 
         _isAutomatic = isAutomatic;
 
-        _prefab = prefab;            
+        _prefab = prefab;
+
+        if (createInStart)
+            for (int i = 0; i < countObjects; i++)
+                CreateObjects();        
+    }
+
+    private void CreateObjects()
+    {
+        T project = GameObject.Instantiate(_prefab);
+
+        project.OnDisableObject(this);
+        project.transform.SetParent(_transformList, true);
+        project.GetT(this);
+
+        _projectails.Enqueue(project);
     }
 
     public T PullOutPool()
     {
-        bool noOne = false;
+        bool noOne;
 
-        for (int i = 0; i < _projects.Count; i++)
-        {
-            if (_projects[i] == null)
-            {
-                _projects.Remove(_projects[i]);
-            }
-            else if (_projects[i].gameObject.activeSelf == false)
-            {
-                _projects[i].gameObject.SetActive(true);
-                
-                return _projects[i];
-            }
-            else
-            {
-                noOne = true;
-            }
+        noOne = _projectails.Count == 0;
+
+        if (!noOne)
+        {                        
+            _projectails.Peek().OnEnableObject(this);
+
+            return _projectails.Dequeue();
         }
-
-        if (noOne && _isAutomatic)
-            return _prefab = CreatePrefab();
+        else if (noOne && _isAutomatic)
+        {
+            return CreatePrefab();
+        }
 
         return null;
     }
+
+    public void Return(T t) => _projectails.Enqueue(t);
 
     private T CreatePrefab()
     {
         T project = GameObject.Instantiate(_prefab);
 
-        _projects.Add(project);
-
+        project.GetT(this);
         project.transform.SetParent(_transformList, true);
 
         return project;
     }
+
+    public int CountObject() => _projectails.Count;
+
+    public bool SetTrue() => true;
+    
+    public bool SetFalse() => false;            
 }

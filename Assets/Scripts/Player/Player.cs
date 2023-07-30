@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
+using SystemObject;
 using PlayerModification;
 using PlayerModification.Wallet;
 using CountryModifi;
 
-public class Player : MonoBehaviour, IBuyer
+public class Player : MonoBehaviour, IBuyer, IChangeActiveObject
 {
     [SerializeField] private Animator _anim;
 
@@ -15,7 +16,7 @@ public class Player : MonoBehaviour, IBuyer
     [SerializeField] private UnityEvent<float> _onChangeMoney;
 
     [SerializeField] private BuyUnit _buyUnit;
-    
+
     [SerializeField] private LayerMask _groundLayer;
 
     [SerializeField] private float _speed;
@@ -28,18 +29,20 @@ public class Player : MonoBehaviour, IBuyer
     private PlayerState _state;
 
     [Header("Task")]
-    [SerializeField] private float _radiuseCircleTask;
-
-    [SerializeField] private LayerMask _taskMask;
-
     [SerializeField] private Transform _posCircleTask;
+    [SerializeField] private Transform _posContainer;
 
-    [SerializeField] private IDeliveryTask _deliveriTask;
+    [SerializeField] private Mark _mark;
 
     private IssueATask _issueATask;
 
-    [SerializeField] private Money _moneyChit;
+    [SerializeField] private float _radiuseCircleTask;
 
+    [SerializeField] private IDeliveryTask _deliveriTask;
+
+    [SerializeField] private LayerMask _taskMask;
+
+    [SerializeField] private MoneyPlayer _moneyChit;
 
     private void Start()
     {
@@ -50,7 +53,7 @@ public class Player : MonoBehaviour, IBuyer
 
         _deliveriTask = GameObject.Find("Country").GetComponent<Country>();
 
-        _issueATask = new IssueATask(_posCircleTask, _radiuseCircleTask, _taskMask);
+        _issueATask = new IssueATask(_posCircleTask, _posContainer, _radiuseCircleTask, _taskMask, this, _mark);        
     }
 
     private void Update()
@@ -70,20 +73,11 @@ public class Player : MonoBehaviour, IBuyer
             FindTask();
     }
 
-    private void FindTask()
-    {
-        _deliveriTask.DeliveryTask(_issueATask.LookForTaks());
-    }    
+    private void FindTask() => _deliveriTask.DeliveryTask(_issueATask.LookForTaks());
 
-    public IWantPay WantPay()
-    {
-        return _wallet;
-    }
+    public IWantPay WantPay() => _wallet;
 
-    public int MoneyCount()
-    {
-        return _wallet.MoneyCount;
-    }
+    public int MoneyCount() => _wallet.MoneyCount;
 
     private void OnDrawGizmos()
     {
@@ -102,4 +96,8 @@ public class Player : MonoBehaviour, IBuyer
             moneyPlayer.gameObject.SetActive(false);
         }
     }
+
+    public bool SetTrue() => true;    
+
+    public bool SetFalse() => false;    
 }

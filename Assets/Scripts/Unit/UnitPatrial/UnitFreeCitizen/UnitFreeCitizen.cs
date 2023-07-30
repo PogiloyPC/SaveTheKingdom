@@ -8,28 +8,36 @@ public class UnitFreeCitizen : UnitCitizen
 
     protected override void StartCitizenUnit()
     {
-        InitState(new FollowObjectState(this, GetComponent<Animator>()), new MoveState(this, GetComponent<Animator>()));        
+        InitState(new FollowObjectState(this, GetComponent<Animator>()), new MoveState(this, GetComponent<Animator>()),
+            new EscapeState(transform, GetComponent<Animator>(), LayerEnemy, Speed, RadiusCircleEnemy));
     }
 
     private void Update()
     {
         _forgeHaveItem = Countr.ItemsInShop.Count > 0 && !_item;
 
-        if (_forgeHaveItem)
+        CheckState();
+
+        GetStateMachineUnit().Update();
+    }
+
+    private void CheckState()
+    {
+        if (CheckEnemy() || GetStateUnitWithEnemy().Aghast())
+        {
+            GetStateMachineUnit().ChangeState(GetStateUnitWithEnemy());
+        }
+        else if (_forgeHaveItem)
         {
             if (GetTaskState() is FollowObjectState followObject)
-            {
                 followObject.LookObject(Countr.ForgePosition);
 
-                GetStateMachineUnit().ChangeState(GetTaskState());
-            }
+            GetStateMachineUnit().ChangeState(GetTaskState());
         }
         else
         {
-                GetStateMachineUnit().ChangeState(GetMoveState());
+            GetStateMachineUnit().ChangeState(GetMoveState());
         }
-
-        GetStateMachineUnit().Update();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

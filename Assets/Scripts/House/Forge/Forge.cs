@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayerModification;
 using StructHouse;
+using SystemObject;
 
-public class Forge : House, IChangeActive
+public class Forge : House, IChangeActiveObject
 {
     [SerializeField] private Transform _posSpawn;
     
@@ -42,7 +43,12 @@ public class Forge : House, IChangeActive
     private void ActivateShopForge()
     {        
         for (int i = 0; i < _maxCellsShop + Mathf.Clamp(LevelHouse, 0, _maxCellsShop + 1); i++)
-            _cellsBuyObjects[i].SetActive(this);
+        {
+            if (_thereIsABuyer)
+                _cellsBuyObjects[i].OnEnableObject(this);
+            else
+                _cellsBuyObjects[i].OnDisableObject(this);
+        }
     }
 
     public Item DeleteItem()
@@ -51,11 +57,6 @@ public class Forge : House, IChangeActive
 
         return item;
     }
-
-    public bool OnSwitchObject()
-    {
-        return _thereIsABuyer;
-    }    
 
     protected override void OnEnterObject(Collider2D other)
     {
@@ -80,4 +81,8 @@ public class Forge : House, IChangeActive
             ActivateShopForge();
         }
     }
+
+    public bool SetTrue() => true;
+
+    public bool SetFalse() => false;
 }

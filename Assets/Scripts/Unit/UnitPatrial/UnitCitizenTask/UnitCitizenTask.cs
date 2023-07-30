@@ -5,7 +5,7 @@ using StructHouse;
 using InterfaceTask;
 
 public class UnitCitizenTask : UnitCitizen, ICompleteTheTask<ITask>, ITasker
-{    
+{
     private Action<UnitCitizenTask> _onDead;
     private Action<UnitCitizenTask> _onCompleteTask;
 
@@ -19,12 +19,24 @@ public class UnitCitizenTask : UnitCitizen, ICompleteTheTask<ITask>, ITasker
 
     protected override void StartCitizenUnit()
     {
-        InitState(new CompleteTaskCountry(GetComponent<Animator>(), transform, Speed), new MoveState(this, GetComponent<Animator>()));
+        InitState(new CompleteTaskCountry(GetComponent<Animator>(), transform, Speed), new MoveState(this, GetComponent<Animator>()),
+            new EscapeState(transform, GetComponent<Animator>(), LayerEnemy, Speed, RadiusCircleEnemy));
     }
 
     private void Update()
     {
-        if (_isWorked && Countr.CurrentDayTime <= 0.6f)
+        CheckState();
+
+        GetStateMachineUnit().Update();
+    }
+
+    private void CheckState()
+    {
+        if (CheckEnemy() || GetStateUnitWithEnemy().Aghast())
+        {
+            GetStateMachineUnit().ChangeState(GetStateUnitWithEnemy());
+        }
+        else if (_isWorked && Countr.CurrentDayTime <= 0.6f)
         {
             if (GetTaskState() is CompleteTaskCountry task)
                 task.LookTaskPos(_stoneMining.MyPos());
@@ -35,8 +47,6 @@ public class UnitCitizenTask : UnitCitizen, ICompleteTheTask<ITask>, ITasker
         {
             GetStateMachineUnit().ChangeState(GetMoveState());
         }
-
-        GetStateMachineUnit().Update();
     }
 
     private void OnDestroy()
@@ -71,10 +81,7 @@ public class UnitCitizenTask : UnitCitizen, ICompleteTheTask<ITask>, ITasker
         _onDead += _taskControle.Return;
     }
 
-    public ITask ReturnTask()
-    {
-        return _stoneMining;
-    }
+    public ITask ReturnTask() => _stoneMining;
 
     public void TakeTask(ITask task)
     {
@@ -83,8 +90,5 @@ public class UnitCitizenTask : UnitCitizen, ICompleteTheTask<ITask>, ITasker
         _isWorked = true;
     }
 
-    public float GetDamage()
-    {
-        return _damage;
-    }
+    public float GetDamage() => _damage;
 }

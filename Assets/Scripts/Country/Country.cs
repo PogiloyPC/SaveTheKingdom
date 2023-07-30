@@ -10,7 +10,7 @@ public class Country : MonoBehaviour, IDeliveryTask
 
     [SerializeField] private Forge _forge;
 
-    public GeneratorIdUnit _generatorId;
+    public GeneratorIdUnit _generatorId = new GeneratorIdUnit();
 
     [SerializeField] private DaySystem _daySystem;
 
@@ -18,14 +18,14 @@ public class Country : MonoBehaviour, IDeliveryTask
     public IReadOnlyCollection<Item> ItemsInShop => _forge.Items;
 
     [SerializeField] private UnitCitizenTask _bricklayerProfession;
-    [SerializeField] private Swordsman _secondProfession;
-    [SerializeField] private Archer _thirdProfession;
+    [SerializeField] private UnitCitizenWarrion _swordsmanProfession;
+    [SerializeField] private UnitCitizenWarrion _archerProfession;
     [SerializeField] private UnitCitizenTask _lumbermanProfession;
     [SerializeField] private UnitCitizenTask _farmerProfession;
     [SerializeField] private UnitCitizenTask _fisherProfession;
-    [SerializeField] private Spearman _seventhProfession;
+    [SerializeField] private UnitCitizenWarrion _spearmanProfession;
     [SerializeField] private UnitCitizenTask _carpenterProfession;
-    [SerializeField] private Wizard _ninthProfession;    
+    [SerializeField] private UnitCitizenWarrion _wizardProfession;
 
     private TaskControle _taskControle = new TaskControle();
 
@@ -81,7 +81,7 @@ public class Country : MonoBehaviour, IDeliveryTask
         {
             UnitCitizen unit = Instantiate(ChooseProfession(item), posUnit.position, Quaternion.identity);
 
-            _taskControle.CheckUnitProfession(unit);            
+            _taskControle.CheckUnitProfession(unit);
 
             Destroy(posUnit.gameObject);
             Destroy(item.gameObject);
@@ -101,7 +101,7 @@ public class Country : MonoBehaviour, IDeliveryTask
                 unitPatrial = _lumbermanProfession;
                 break;
             case TypeItem.bow:
-                unitPatrial = _thirdProfession;
+                unitPatrial = _archerProfession;
                 break;
             case TypeItem.fishingRod:
                 unitPatrial = _fisherProfession;
@@ -110,13 +110,13 @@ public class Country : MonoBehaviour, IDeliveryTask
                 unitPatrial = _farmerProfession;
                 break;
             case TypeItem.spear:
-                unitPatrial = _seventhProfession;
+                unitPatrial = _spearmanProfession;
                 break;
             case TypeItem.staff:
-                unitPatrial = _ninthProfession;
+                unitPatrial = _wizardProfession;
                 break;
             case TypeItem.sword:
-                unitPatrial = _secondProfession;
+                unitPatrial = _swordsmanProfession;
                 break;
             case TypeItem.hamer:
                 unitPatrial = _carpenterProfession;
@@ -131,10 +131,10 @@ public class Country : MonoBehaviour, IDeliveryTask
     public void RemoveFreeUnits()
     {
 
-    }     
+    }
 
     public void DeliveryTask(ITask task)
-    {        
-        _taskControle.DistributeTasks(task);       
-    }   
+    {
+        _taskControle.DistributeTasks(task);
+    }
 }

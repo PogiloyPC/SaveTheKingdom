@@ -1596,10 +1596,10 @@ TextureImporter:
         serializedVersion: 2
         x: 869
         y: 704
-        width: 22
-        height: 58
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 88
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1615,12 +1615,12 @@ TextureImporter:
       name: TX Village Props_70
       rect:
         serializedVersion: 2
-        x: 899
+        x: 869
         y: 704
-        width: 26
-        height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 88
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1636,12 +1636,12 @@ TextureImporter:
       name: TX Village Props_71
       rect:
         serializedVersion: 2
-        x: 930
+        x: 869
         y: 704
-        width: 27
-        height: 59
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 88
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2564,8 +2564,8 @@ TextureImporter:
         y: 415
         width: 120
         height: 138
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49177298, y: 0.17666206}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2585,8 +2585,8 @@ TextureImporter:
         y: 415
         width: 153
         height: 162
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.52694285, y: 0.16651954}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3921,6 +3921,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: TX Village Props_180
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 704
+        width: 88
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8e0fdf130366874da02044335196302
+      internalID: -1098683376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Village Props_181
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 704
+        width: 88
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaf1b56904980814191b8fec21b9672c
+      internalID: 1484613713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3998,6 +4040,7 @@ TextureImporter:
       TX Village Props_114: 1867082226
       TX Village Props_67: 1840722870
       TX Village Props_128: -1737279266
+      TX Village Props_182: -1411346020
       TX Village Props_96: -683782771
       TX Village Props_56: 471094031
       TX Village Props_35: -138413177
@@ -4013,11 +4056,13 @@ TextureImporter:
       TX Village Props_162: 232204697
       TX Village Props_173: -249064549
       TX Village Props_141: -1823769065
+      TX Village Props_180: -1098683376
       TX Village Props_101: 793569970
       TX Village Props_134: -1475621022
       TX Village Props_121: -499006941
       TX Village Props_151: -1989542934
       TX Village Props_167: -927626202
+      TX Village Props_181: 1484613713
       TX Village Props_6: -126273931
       TX Village Props_74: -1782235156
       TX Village Props_123: -1865898423

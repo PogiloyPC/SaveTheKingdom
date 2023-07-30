@@ -1,6 +1,6 @@
 using PlayerModification.Wallet;
 using UnityEngine.Events;
-using UnityEngine;
+using PoolInterface;
 
 public class PlayerWallet : IWantPay, IGetMoney
 {
@@ -35,13 +35,13 @@ public class PlayerWallet : IWantPay, IGetMoney
         return buy;
     }
 
-    public void GetMoney(Money money)
+    public void GetMoney(IHaveMoney money)
     {
-        if (money.CountMoney <= 0)
+        if (money.GiveMoney() <= 0)
             return;
 
-        _moneyCount += money.CountMoney;
+        _moneyCount += money.GiveMoney();
 
-        OnChangeMoney.Invoke(_moneyCount);
+        OnChangeMoney?.Invoke(_moneyCount);
     }
 }

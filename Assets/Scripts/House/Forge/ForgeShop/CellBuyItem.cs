@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using PlayerModification;
 using StructHouse;
+using SystemObject;
 
-public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IActiveObject
+public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, ISetActiveObject
 {
     [SerializeField] private Image _timerBuy;
 
@@ -71,8 +72,7 @@ public class CellBuyItem : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         _timerBuy.fillAmount = 0f;
     }
 
-    public void SetActive(IChangeActive changeActive)
-    {
-        gameObject.SetActive(changeActive.OnSwitchObject());
-    }
+    public void OnEnableObject(IChangeActiveObject active) => gameObject.SetActive(active.SetTrue());    
+
+    public void OnDisableObject(IChangeActiveObject active) => gameObject.SetActive(active.SetFalse());    
 }

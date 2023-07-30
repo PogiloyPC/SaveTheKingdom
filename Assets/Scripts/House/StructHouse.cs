@@ -28,6 +28,6 @@ namespace StructHouse
 
     public interface IChangeActive
     {
-        public bool OnSwitchObject();
+        public bool OnSwitchActive();
     }    
 }

@@ -11,44 +11,57 @@ public class TaskControle : IDistributeTasks
     private PoolTasks<UnitCitizenTask, ITask> _farmTasksPool = new PoolTasks<UnitCitizenTask, ITask>();
     private PoolTasks<UnitCitizenTask, ITask> _lakeTasksPool = new PoolTasks<UnitCitizenTask, ITask>();
 
+    private PostPositionGenerator _generatorPosPost = new PostPositionGenerator();
+
     public void CheckUnitProfession(UnitCitizen unit)
     {
         switch (unit.TypeUnit)
         {
             case TypeUnitCitizen.Farmer:
                 UnitCitizenTask farmer = (UnitCitizenTask)unit;
-
                 farmer.GetTaskControle(_farmTasksPool);
 
                 _farmTasksPool.GetUnit(farmer);
                 break;
             case TypeUnitCitizen.Fisher:
                 UnitCitizenTask fisher = (UnitCitizenTask)unit;
-
                 fisher.GetTaskControle(_lakeTasksPool);
 
                 _lakeTasksPool.GetUnit(fisher);
                 break;
             case TypeUnitCitizen.Bricklayer:
                 UnitCitizenTask bricklayer = (UnitCitizenTask)unit;
-
                 bricklayer.GetTaskControle(_stoneTasksPool);
 
                 _stoneTasksPool.GetUnit(bricklayer);
                 break;
             case TypeUnitCitizen.Lumberman:
                 UnitCitizenTask lumberman = (UnitCitizenTask)unit;
-
                 lumberman.GetTaskControle(_woodTasksPool);
 
                 _woodTasksPool.GetUnit(lumberman);
                 break;
             case TypeUnitCitizen.Carpenter:
                 UnitCitizenTask carpenter = (UnitCitizenTask)unit;
-
                 carpenter.GetTaskControle(_buildTasksPool);
 
                 _buildTasksPool.GetUnit(carpenter);
+                break;
+            case TypeUnitCitizen.Archer:
+                UnitCitizenWarrion archer = (UnitCitizenWarrion)unit;
+                archer.GetPosPost(_generatorPosPost);                
+                break;
+            case TypeUnitCitizen.Spearman:
+                UnitCitizenWarrion spearman = (UnitCitizenWarrion)unit;
+                spearman.GetPosPost(_generatorPosPost);                
+                break;
+            case TypeUnitCitizen.Swordman:
+                UnitCitizenWarrion swordman = (UnitCitizenWarrion)unit;
+                swordman.GetPosPost(_generatorPosPost);                
+                break;
+            case TypeUnitCitizen.Wizard:
+                UnitCitizenWarrion wizard = (UnitCitizenWarrion)unit;
+                wizard.GetPosPost(_generatorPosPost);                
                 break;
             default:
                 break;

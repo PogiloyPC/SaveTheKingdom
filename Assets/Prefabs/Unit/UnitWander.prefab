@@ -139,6 +139,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 8026756988747714904}
   _speed: 1
+  _layerEnemy:
+    serializedVersion: 2
+    m_Bits: 4096
+  _radiusCircleEnemy: 1.2
   _maxDistanceWander: 1
   _radiusCircle: 1.2
   _unitPatrial:

@@ -3,12 +3,17 @@ using UnityEngine;
 using UnitStruct;
 using InterfaceTask;
 
-public class Fishing : MonoBehaviour, ITask
+public class Fishing : MonoBehaviour, ITask, IFieldForFish
 {
-    [SerializeField] private MoneyPlayer _money;
+    [SerializeField] private Fish _fish;
 
     [SerializeField] private float _countOfShovelsFinished;
-    private float _countOfShovelsCurrent;    
+    private float _countOfShovelsCurrent;
+
+    public void Start()
+    {
+        _fish.InitFish(this);
+    }
 
     public void CompleteTheTask(ITasker unit)
     {
@@ -18,18 +23,13 @@ public class Fishing : MonoBehaviour, ITask
         {
             _countOfShovelsCurrent -= _countOfShovelsCurrent;
 
-            Harvest();
+            _fish.PullFish(this);
         }
     }
 
-    public Vector3 MyPos()
-    {
-        return transform.position;
-    }
+    public float FinishValue() => _countOfShovelsFinished;
 
-    private void Harvest()
-    {
-        Rigidbody2D rb = Instantiate(_money, transform.position, Quaternion.identity).GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.up * 4f, ForceMode2D.Impulse);
-    }
+    public bool IsPulled() => true;
+
+    public Vector3 MyPos() => transform.position;
 }

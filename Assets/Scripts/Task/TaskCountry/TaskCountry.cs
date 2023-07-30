@@ -9,6 +9,12 @@ public abstract class TaskCountry : MonoBehaviour, ITaskLabel, ISurroinding
 
     [SerializeField] private SpriteRenderer _render;
 
+    [SerializeField] private uint _numberLayer = 11;
+
+    private int _priceTask = 1;
+
+    private Mark _mark;
+
     public abstract void CompleteTheTask(ITasker unit);
 
     private bool _isMarked;
@@ -19,20 +25,23 @@ public abstract class TaskCountry : MonoBehaviour, ITaskLabel, ISurroinding
     {
         _isMarked = markTask.MarkTask();
 
-        gameObject.layer = 11;
-
-        //if (_isMarked)
-        //    _collide.enabled = false;
+        gameObject.layer = (int)_numberLayer;
     }
 
-    public void SelectTask()
+    public int PriceTask() => _priceTask;
+
+    public void SelectTask() => _render.color = Color.green;
+
+    public void DeselectTask() => _render.color = Color.white;
+
+    public void GetMark(Mark mark)
     {
-        _render.color = Color.green;
+        if (!_mark)
+            _mark = mark;
     }
 
-    public void DeselectTask()
+    private void OnDestroy()
     {
-        _render.color = Color.white;
+        _mark?.gameObject.SetActive(false);
     }
-
 }
