@@ -38,7 +38,7 @@ public abstract class StateAttackUnit : StateUnitWithEnemy
 
     protected void Moving(float speed)
     {
-        PosUnit().position = Vector2.MoveTowards(PosUnit().position, new Vector2(EnemyPos.x, PosUnit().position.y), 
+        PosUnit().position = Vector2.MoveTowards(PosUnit().position, new Vector2(_enemy.PosTarget().x, PosUnit().position.y), 
         speed * Time.deltaTime);
 
         AnimationRun(true);

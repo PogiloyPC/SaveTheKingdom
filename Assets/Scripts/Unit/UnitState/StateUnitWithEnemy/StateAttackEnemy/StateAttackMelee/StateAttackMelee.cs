@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class StateAttackMelee : StateAttackUnit
 {
+    private IHitEnemy _hit;
+
     public override float FinishTimeAttack() => 0.5f;
 
-    public StateAttackMelee(Transform transformUnit, Animator anim, LayerMask enemyLayer, float speed, float radiusCircle, float distance) :
+    public StateAttackMelee(Transform transformUnit, Animator anim, LayerMask enemyLayer, float speed, float radiusCircle, 
+        float distance, IHitEnemy hit) :
         base(transformUnit, anim, enemyLayer, speed, radiusCircle, distance)
     {
-
+        _hit = hit;
     }
 
     protected override void InteractionWithEnemy()
@@ -20,7 +23,7 @@ public class StateAttackMelee : StateAttackUnit
         {
             CheckTimeAttack();
 
-            if (Vector2.Distance(PosUnit().position, EnemyPos) <= DistanceAttack)
+            if (Vector2.Distance(PosUnit().position, _enemy.PosTarget()) <= DistanceAttack)
             {
                 AnimationRun(false);
 
@@ -39,6 +42,8 @@ public class StateAttackMelee : StateAttackUnit
     protected override void Attack()
     {
         AnimationAttack();
+
+        _enemy.TakeDamage(_hit);
 
         UpdateTimer();
     }

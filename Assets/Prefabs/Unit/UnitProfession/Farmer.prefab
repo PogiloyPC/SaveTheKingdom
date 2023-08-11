@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4223410791859858715}
   - component: {fileID: 4223410791859858712}
   - component: {fileID: 4509573686674997497}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Farmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,12 +158,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 4223410791859858712}
-  _speed: 1
   _layerEnemy:
     serializedVersion: 2
     m_Bits: 4096
+  _speed: 1
   _radiusCircleEnemy: 1.2
   _typeUnit: 4
   _id: 0
+  _health: 40
   _damage: 0.2
   _isWorked: 0

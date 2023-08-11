@@ -2,11 +2,12 @@ using UnityEngine;
 using UnitStruct;
 using InterfaceTask;
 
-public abstract class UnitCitizenWarrion : UnitCitizen, IWarrion
+public abstract class UnitCitizenWarrion : UnitCitizen, IWarrion, IHitEnemy
 {
     private Vector3 _postPosition;
 
     [SerializeField] private float _distanceAttack;
+    [SerializeField] private float _damage;
     public float DistanceAttack { get { return _distanceAttack; } private set { } }
 
     private void Update()
@@ -43,4 +44,6 @@ public abstract class UnitCitizenWarrion : UnitCitizen, IWarrion
     }
 
     public Vector3 MyPos() => transform.position;
+
+    public float Hit() => _damage;    
 }

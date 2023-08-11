@@ -28,7 +28,7 @@ public class EscapeState : StateUnitWithEnemy
         if (EnemyFixed())
         {
             PosUnit().position = Vector2.MoveTowards(PosUnit().position,
-                new Vector2(EnemyPos.x, PosUnit().position.y), -Speed * Time.deltaTime);
+                new Vector2(_enemy.PosTarget().x, PosUnit().position.y), -Speed * Time.deltaTime);
 
             TimerAghast = StartTimerAghast;
 

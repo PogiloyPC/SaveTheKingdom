@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 493350713408889376}
   - component: {fileID: 493350713408889401}
   - component: {fileID: 7120000179252346459}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Lumberman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,12 +158,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 493350713408889401}
-  _speed: 1
   _layerEnemy:
     serializedVersion: 2
     m_Bits: 4096
+  _speed: 1
   _radiusCircleEnemy: 1.2
   _typeUnit: 3
   _id: 0
+  _health: 40
   _damage: 0.2
   _isWorked: 0

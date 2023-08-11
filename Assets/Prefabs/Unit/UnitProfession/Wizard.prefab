@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4360928806940343693}
   - component: {fileID: 2140532451282247759}
   - component: {fileID: 4360928806940343694}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Wizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,14 +138,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 4360928806940343694}
-  _speed: 1
   _layerEnemy:
     serializedVersion: 2
     m_Bits: 4096
+  _speed: 1
   _radiusCircleEnemy: 1.2
   _typeUnit: 8
   _id: 0
+  _health: 30
   _distanceAttack: 1
+  _damage: 15
   _bullet: {fileID: 1463624516487167818, guid: d5176e9075fa0284080bec2ee93fb60b, type: 3}
 --- !u!95 &4360928806940343694
 Animator:

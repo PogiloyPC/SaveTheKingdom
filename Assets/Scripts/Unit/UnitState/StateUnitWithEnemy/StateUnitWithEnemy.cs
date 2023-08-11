@@ -4,7 +4,7 @@ public abstract class StateUnitWithEnemy : UnitState
 {
     private Transform _transformUnit;
 
-    private Enemy _enemy;
+    internal IEnemyHealth _enemy;
 
     public LayerMask EnemyLayer { get; private set; }
 
@@ -12,8 +12,6 @@ public abstract class StateUnitWithEnemy : UnitState
     public float RadiusCircle { get; private set; }
     public float TimerAghast;
     public float StartTimerAghast { get; private set; } = 5f;
-
-    public Vector3 EnemyPos => _enemy.transform.position;
 
     public StateUnitWithEnemy(Transform transformUnit, Animator anim, LayerMask enemyLayer, float speed, float radiusCircle)
     {
@@ -25,13 +23,20 @@ public abstract class StateUnitWithEnemy : UnitState
         RadiusCircle = radiusCircle;
     }
 
-    public bool EnemyFixed() => _enemy;
+    public bool EnemyFixed()
+    {
+        if (_enemy != null)
+            return true;
+        else
+            return false;
+
+    }
 
     protected Transform PosUnit() => _transformUnit;
 
     protected void LookRotationEnemy()
     {
-        if (_transformUnit.position.x > _enemy.transform.position.x)
+        if (_transformUnit.position.x > _enemy.PosTarget().x)
             _transformUnit.localScale = new Vector3(-1f, 1f, 1f);
         else
             _transformUnit.localScale = new Vector3(1f, 1f, 1f);
@@ -41,7 +46,7 @@ public abstract class StateUnitWithEnemy : UnitState
     {
         Collider2D collider = Physics2D.OverlapCircle(_transformUnit.position, RadiusCircle, EnemyLayer);
 
-        _enemy = collider?.gameObject.GetComponent<Enemy>();
+        _enemy = collider?.gameObject.GetComponent<IEnemyHealth>();
     }
 
     public bool Aghast() => TimerAghast > 0f;

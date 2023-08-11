@@ -20,11 +20,11 @@ public abstract class StateAttackRange : StateAttackUnit
         {
             CheckTimeAttack();
 
-            if (Vector2.Distance(PosUnit().position, EnemyPos) <= DistanceAttack / 1.5f)
+            if (Vector2.Distance(PosUnit().position, _enemy.PosTarget()) <= DistanceAttack / 1.5f)
             {
                 Moving(-Speed);
             }
-            else if (Vector2.Distance(PosUnit().position, EnemyPos) <= DistanceAttack)
+            else if (Vector2.Distance(PosUnit().position, _enemy.PosTarget()) <= DistanceAttack)
             {
                 AnimationRun(false);
 
@@ -38,14 +38,5 @@ public abstract class StateAttackRange : StateAttackUnit
 
             LookRotationEnemy();
         }
-    }
-
-
-
-    protected override void Attack()
-    {
-        AnimationAttack();
-
-        UpdateTimer();
     }
 }

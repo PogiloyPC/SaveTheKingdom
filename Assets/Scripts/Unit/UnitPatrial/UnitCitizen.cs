@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnitStruct;
 
-public abstract class UnitCitizen : Unit
+public abstract class UnitCitizen : Unit, IUnitHealth
 {
     [SerializeField] private TypeUnitCitizen _typeUnit;
     public TypeUnitCitizen TypeUnit { get { return _typeUnit; } private set { } }
@@ -10,6 +10,8 @@ public abstract class UnitCitizen : Unit
     protected Country Countr => _country;
 
     [SerializeField] private int _id;
+
+    [SerializeField] private float _health;
 
     public int Id { get { return _id; } private set { } }   
 
@@ -35,4 +37,19 @@ public abstract class UnitCitizen : Unit
     {
         return _country.RightBorders;
     }
+
+    public void TakeDamage(IHitUnit hit)
+    {
+        _health -= hit.Hit();
+
+        if (_health <= 0f)
+            Death();
+    }
+
+    private void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    public Vector3 PosTarget() => transform.position;    
 }

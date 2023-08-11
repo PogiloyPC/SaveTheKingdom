@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3047564138369760650}
   - component: {fileID: 3658652347100968050}
   - component: {fileID: 7375627625078027649}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Fisher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,13 +159,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 3658652347100968050}
-  _speed: 1
   _layerEnemy:
     serializedVersion: 2
     m_Bits: 4096
+  _speed: 1
   _radiusCircleEnemy: 1.2
   _typeUnit: 5
   _id: 0
+  _health: 40
   _damage: 0.2
   _isWorked: 0
 --- !u!1 &6393636204838653795
@@ -177,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3651901550672589405}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

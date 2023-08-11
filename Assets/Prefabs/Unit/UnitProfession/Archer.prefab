@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 333124908472678380}
   - component: {fileID: 333124908472678389}
   - component: {fileID: 7466668364773343810}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,11 +158,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 333124908472678389}
-  _speed: 1
   _layerEnemy:
     serializedVersion: 2
     m_Bits: 4096
+  _speed: 1
   _radiusCircleEnemy: 1.2
   _typeUnit: 7
   _id: 0
+  _health: 40
   _distanceAttack: 1
+  _damage: 10

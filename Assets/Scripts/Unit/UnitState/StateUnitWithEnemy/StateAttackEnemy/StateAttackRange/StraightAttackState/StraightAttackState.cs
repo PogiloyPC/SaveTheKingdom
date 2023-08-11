@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StraightAttackState : StateAttackRange, IDirectionShot
@@ -30,7 +28,7 @@ public class StraightAttackState : StateAttackRange, IDirectionShot
 
     private void CheckSideEnemy()
     {
-        if (EnemyPos.x > PosUnit().position.x)
+        if (_enemy.PosTarget().x > PosUnit().position.x)
             _directionShot = Vector3.right;
         else
             _directionShot = Vector3.left;

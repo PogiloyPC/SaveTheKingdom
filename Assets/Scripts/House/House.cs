@@ -40,14 +40,7 @@ public class House : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other)
-    {
-        Player player = other.gameObject.GetComponent<Player>();
-
-        if (player != null)
-        {
-           
-        }
-
+    {        
         OnExitObject(other);
     }
 

@@ -11,14 +11,12 @@ public abstract class Unit : MonoBehaviour
     private MoveState _moveState;
     private StateUnitWithEnemy _stateUnitWithEnemy;
 
-    [SerializeField, Range(0f, 3f)] private float _speed;
-    public float Speed { get { return _speed; } private set { } }
-
-    [Header("CheckEnemy")]
     [SerializeField] private LayerMask _layerEnemy;
     public LayerMask LayerEnemy { get { return _layerEnemy; } private set { } }
-
+   
+    [SerializeField, Range(0f, 3f)] private float _speed;
     [SerializeField] private float _radiusCircleEnemy;
+    public float Speed { get { return _speed; } private set { } }
     public float RadiusCircleEnemy { get { return _radiusCircleEnemy; } private set { } }    
 
     private void Start()

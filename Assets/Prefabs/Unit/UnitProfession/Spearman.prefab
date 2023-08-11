@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5556478310832369246}
   - component: {fileID: 5556478310832369223}
   - component: {fileID: 5918753427028715817}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Spearman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,11 +158,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 5556478310832369223}
-  _speed: 1
   _layerEnemy:
     serializedVersion: 2
     m_Bits: 4096
+  _speed: 1
   _radiusCircleEnemy: 1.2
   _typeUnit: 9
   _id: 0
+  _health: 60
   _distanceAttack: 0.5
+  _damage: 7
